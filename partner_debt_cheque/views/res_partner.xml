@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="cheque_template_followup" inherit_id="account_followup.template_followup_report">
+        <xpath expr="//table" position="after">
+            <t t-if="partner.bank_lines_ids">
+            <div class="table-responsive">
+              <table class='table table-striped m-auto table-hover'>
+                <thead>
+                  <tr>
+                    <th colspan="4"><h2>Cheques A Cobrar</h2></th>
+                  </tr>
+                  <tr>
+                  <th>Nombre</th>
+                  <th>Fecha</th>
+                  <th>Etiqueta</th>
+                  <th>Cantidad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr t-foreach="partner.bank_lines_ids" t-as="blines">
+                   <td><t t-esc="blines.name"></t></td>
+                   <td><t t-esc="blines.date"></t></td>
+                   <td><t t-esc="blines.payment_ref"></t></td>
+                   <td><span t-field="blines.amount"  t-field-options='{"widget": "monetary", "display_currency": "partner.currency_id"}'></span></td>
+                  </tr>
+              </tbody>
+              </table>
+              </div>
+              </t>
+        </xpath>
+    </template>
+
+</odoo>

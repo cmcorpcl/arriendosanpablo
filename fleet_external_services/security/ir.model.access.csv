@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fleet_km_tag,access_fleet_km_tag,model_fleet_km_tag,,1,1,1,1
+access_fleet_model_km,access_fleet_model_km,model_fleet_model_km,,1,1,1,1
+access_fleet_model_horometer,access_fleet_model_horometer,model_fleet_model_horometer,,1,1,1,1
+access_fleet_service_notification,access_fleet_service_notification,model_fleet_service_notification,,1,1,1,1

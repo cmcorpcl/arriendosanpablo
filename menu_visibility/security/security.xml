@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--User Groups, Access Rights and Security Mechanism in Detail-->
+    <!-- https://www.youtube.com/watch?v=mzg3EGD_6Gw&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=53  -->
+    <record id="module_visible" model="ir.module.category">
+        <field name="name">Visibilizar Modulos</field>
+        <field name="description">Visibilizar Modulos</field>
+        <field name="sequence">45</field>
+    </record>
+
+    <record id="group_visible_contacts" model="res.groups">
+        <field name="name">Contactos</field>
+        <field name="category_id" ref="module_visible"/>
+    </record>
+
+    <record id="group_visible_hr_employee" model="res.groups">
+        <field name="name">Empleados</field>
+        <field name="category_id" ref="module_visible"/>
+    </record>
+
+    <record model="ir.ui.menu" id="contacts.menu_contacts">
+        <field name="groups_id" eval="[(6,0,[ref('menu_visibility.group_visible_contacts')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="hr.menu_hr_root">
+        <field name="groups_id" eval="[(6,0,[ref('menu_visibility.group_visible_hr_employee')])]"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="message_generator_wizard" model="ir.ui.view">
+    <field name="name">Mensaje</field>
+    <field name="model">dte_email_data.message.wizard</field>
+    <field name="arch" type="xml">
+    <form>
+        <group>
+            <field name="message"/>
+            <field name="message_no_rut"/>
+        </group>
+        <footer>
+          <button name="redirect_to_list" string="Ir a lista" class="btn-primary" type="object" />
+        </footer>
+    </form>
+    </field>
+</record>
+
+<record id="message_generator_dte_partner_wizard" model="ir.ui.view">
+  <field name="name">Mensaje</field>
+  <field name="model">dte_email_data.message.wizard</field>
+  <field name="arch" type="xml">
+  <form>
+      <p>
+        Se han sincronizado los contribuyentes, con éxito.
+        Para sincronizarlos con tus contactos, debes presionar la opción <strong>Sincronizar con Odoo</strong> en Contribuyentes SII
+      </p>
+      <footer>
+        <button name="redirect_to_list_dte_partner" string="Ir a lista" class="btn-primary" type="object" />
+      </footer>
+  </form>
+  </field>
+</record>
+
+</odoo>

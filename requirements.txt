@@ -1,0 +1,3 @@
+requests-pkcs12
+pdf417gen
+cryptography==38.0.4

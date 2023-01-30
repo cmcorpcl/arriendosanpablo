@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="fleet_rental_copy_data_on_order" model="ir.ui.view">
+        <field name="name">fleet.rental.copy.data.on.order</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
+        <field name="arch" type="xml">
+          <xpath expr="//header" position="inside">
+              <button string="Traspaso a arriendo" name="copy_to_rental" type="object" class="oe_highlight"/>
+          </xpath>
+          <field name="vin_sn" position="before">
+              <field name="tonnage" />
+          </field>
+          <xpath expr="//div[@name='button_box']" position="inside">
+            <button name="return_action_to_open_inherit" type="object" class="oe_stat_button" icon="fa-fire" context="{'xml_id':'fleet_vehicle_fuel_action'}" help="Muestra el registro de combustible del vehiculo">
+                <field name="fuel_count" widget="statinfo" string="Combustible"/>
+              </button>
+          </xpath>
+        </field>
+      </record>
+
+
+    <!-- COMBUSTIBLES -->
+
+    <record id='fleet_vehicle_odometer_view_form' model='ir.ui.view'>
+      <field name="name">fleet.vehicle.fuel.form</field>
+      <field name="model">fleet.vehicle.fuel</field>
+      <field name="arch" type="xml">
+          <form string="Registro Combustible">
+              <sheet>
+                  <group>
+                      <field name="vehicle_id" options="{'no_create': True, 'no_create_edit' : True}"/>
+                      <field name="date" />
+                      <field name="time" widget="float_time"/>
+                      <field name="start_fuel" />
+                      <field name="end_fuel" />
+                      <field name="rental_id" options="{'no_create': True, 'no_create_edit' : True}" />
+                  </group>
+              </sheet>
+          </form>
+      </field>
+  </record>
+
+  <record id='fleet_vehicle_fuel_view_tree' model='ir.ui.view'>
+      <field name="name">fleet.vehicle.fuel.tree</field>
+      <field name="model">fleet.vehicle.fuel</field>
+      <field name="arch" type="xml">
+          <tree string="Registro Combustible" editable="top">
+            <field name="date" />
+            <field name="time" widget="float_time"/>
+            <field name="vehicle_id" widget="many2one_avatar" options="{'no_create': True, 'no_create_edit' : True}"/>
+            <field name="driver_id" widget="many2one_avatar" options="{'no_create': True, 'no_create_edit' : True}"/>
+            <field name="start_fuel" />
+            <field name="end_fuel" />
+            <field name="note"/>
+            <field name="rental_id"  widget="many2one_avatar" options="{'no_create': True, 'no_create_edit' : True}"/>
+          </tree>
+      </field>
+  </record>
+
+  <record id='fleet_vehicle_fuel_view_kanban' model='ir.ui.view'>
+      <field name="name">fleet.vehicle.fuel.kanban</field>
+      <field name="model">fleet.vehicle.fuel</field>
+      <field name="arch" type="xml">
+          <kanban class="o_kanban_mobile">
+              <templates>
+                  <t t-name="kanban-box">
+                      <div t-attf-class="oe_kanban_global_click">
+                          <div>
+                              <strong>
+                                  <field name="vehicle_id" widget="res_partner_many2one"/>
+                                  <span class="float-right"><field name="date"/></span>
+                              </strong>
+                          </div>
+                          <div>
+                              <span><field name="driver_id" widget="res_partner_many2one"/></span>
+                              <span class="float-right"><field name="end_fuel"/> L</span>
+                          </div>
+                      </div>
+                  </t>
+              </templates>
+          </kanban>
+      </field>
+  </record>
+
+  <record id='fleet_vehicle_fuel_view_search' model='ir.ui.view'>
+      <field name="name">fleet.vehicle.fuel.search</field>
+      <field name="model">fleet.vehicle.fuel</field>
+      <field name="arch" type="xml">
+          <search string="Vehicles fuels" >
+              <field name="vehicle_id"/>
+              <field name="driver_id"/>
+              <field name="date"/>
+              <field name="time"/>
+              <group expand="0" string="Group By">
+                  <filter name="groupby_vehicle" context="{'group_by': 'vehicle_id'}" string="Vehiculo"/>
+              </group>
+          </search>
+      </field>
+  </record>
+
+  <record id="fleet_vehicle_fuel_view_graph" model="ir.ui.view">
+     <field name="name">fleet.vehicle.fuel.graph</field>
+     <field name="model">fleet.vehicle.fuel</field>
+     <field name="arch" type="xml">
+          <graph string="Valores de combustible por vehiculo" sample="1">
+              <field name="vehicle_id" type="row"/>
+              <field name="end_fuel" type="measure"/>
+          </graph>
+      </field>
+  </record>
+
+      <record id='fleet_vehicle_fuel_action' model='ir.actions.act_window'>
+        <field name="name">Combustibles</field>
+        <field name="res_model">fleet.vehicle.fuel</field>
+        <field name="view_mode">tree,kanban,form,graph,pivot</field>
+        <field name="context"></field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Crear nuevo registro de combustible
+          </p><p>
+            Puedes crear varios registros de combustibles para todos los vehiculos
+          </p>
+        </field>
+    </record>
+
+    <menuitem
+    id="fleet_vehicle_fuel_item"
+    name="Combustible"
+    parent="fleet.fleet_vehicles"
+    action="fleet_vehicle_fuel_action"
+    sequence="30"/>
+    <!-- COMBUSTIBLES -->
+
+    <!-- ODOMETRO -->
+    <record id="fleet_rental_odometer_inherit" model="ir.ui.view">
+      <field name="name">fleet.rental.odometer.inherit</field>
+      <field name="model">fleet.vehicle.odometer</field>
+      <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_tree" />
+      <field name="arch" type="xml">
+        <field name="date" position="after">
+          <field name="situation_type_id"  options="{'no_create': True, 'no_create_edit' : True}" />
+        </field>
+        <field name="unit" position="after">
+            <field name="note"/>
+            <field name="rental_id" options="{'no_create': True, 'no_create_edit' : True}"  widget="many2one_avatar" />
+        </field>
+      </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_guide_truck,access_guide_truck,model_guide_truck,base.group_user,1,1,1,1
+access_guide_truck_all,access_guide_truck_all,model_guide_truck,,1,1,1,1
+access_destination_zone,access_destination_zone,model_destination_zone,base.group_user,1,1,1,1

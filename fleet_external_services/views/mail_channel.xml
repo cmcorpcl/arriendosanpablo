@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mail_channel_fleet_services" model="ir.ui.view">
+        <field name="name">mail.channel.fleet.services</field>
+        <field name="model">mail.channel</field>
+        <field name="inherit_id" ref="mail.mail_channel_view_form" />
+        <field name="arch" type="xml">
+            <field name="description" position="after">
+                <field name="notification_fleet"/>
+            </field>
+        </field>
+      </record>
+
+
+</odoo>

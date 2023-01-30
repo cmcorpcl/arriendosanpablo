@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_synchro_partner_form" model="ir.ui.view">
+        <field name="name">dte_email_data.synchro_partner.wizard.form</field>
+        <field name="model">dte_email_data.synchro_partner.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Sincronización contribuyentes con SII">
+                <p>
+                    Se sincronizara los contribuyentes autorizados a la una lista de odoo, esto tomara alrededor de 20-30 min.
+                </p>
+                <footer>
+                    <button string="Sincronizar" name="synchronization" type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_synchro_partner" model="ir.actions.act_window">
+        <field name="name">Sincronización con SII</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">dte_email_data.synchro_partner.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_synchro_partner_form"/>
+        <field name="target">new</field>
+    </record>
+
+
+        <record id="clear_dte_partner_form" model="ir.ui.view">
+            <field name="name">dte_email_data.synchro_partner.wizard.clearall.form</field>
+            <field name="model">dte_email_data.synchro_partner.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Limpiar listado de contribuyentes">
+                    <p>
+                        Se sincronizara a una lista interna en ODOO los contribuyentes y sus correos de intercambio, esto tomara unos minutos.
+                    </p>
+                    <footer>
+                        <button string="Limpiar Lista" name="clear_all_records" type="object" class="btn-primary"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_clear_dte_partner" model="ir.actions.act_window">
+            <field name="name">Limpiar lista</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">dte_email_data.synchro_partner.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="clear_dte_partner_form"/>
+            <field name="target">new</field>
+        </record>
+
+
+
+        <record id="synchro_dte_partner_with_partner_form" model="ir.ui.view">
+            <field name="name">dte_email_data.synchro_partner.wizard.withpartner.form</field>
+            <field name="model">dte_email_data.synchro_partner.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sincronización contribuyentes con contactos">
+                    <p>
+                        Se integraran los correos de intercambio a todos los contactos, esto tomara tiempo dependiendo de la cantidad de contactos que presente.
+                    </p>
+                    <footer>
+                        <button string="Sincronizar con odoo" name="synchro_with_res_partner" type="object" class="btn-primary"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_synchro_dte_partner_with_partner" model="ir.actions.act_window">
+            <field name="name">Sincronizar contribuyentes con odoo</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">dte_email_data.synchro_partner.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="synchro_dte_partner_with_partner_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            id="dte_synchro_dte_partner_with_partner"
+            name="Sincronizar con odoo"
+            parent="dte_partner_menu"
+            action="action_synchro_dte_partner_with_partner"
+            groups="group_dte_email_admin"
+            sequence="30"/>
+
+
+</odoo>

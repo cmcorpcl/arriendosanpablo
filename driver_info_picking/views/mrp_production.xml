@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="zone_info_mrp_tree" model="ir.ui.view">
+        <field name="model">mrp.production</field>
+        <field name="name">zone.info.mrp.tree</field>
+        <field name="inherit_id" ref="mrp.mrp_production_tree_view" />
+        <field name="arch" type="xml">
+            <field name="origin" position="before">
+                <field name="zone_name" string="Zona Destino"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="zone_search_mrp" model="ir.ui.view">
+        <field name="name">zone.search.mrp</field>
+        <field name="model">mrp.production</field>
+        <field name='inherit_id' ref='mrp.view_mrp_production_filter'/>
+        <field name='arch' type='xml'>
+            <search>
+                <field name="zone_stored" string="Zona destino"  filter_domain="[('zone_stored', 'ilike', self )]" />
+                <separator/>
+                <filter name="zone_stored" string="Zona destino" context="{'group_by': 'zone_stored'}" />
+            </search>
+        </field>
+    </record>
+
+
+</odoo>

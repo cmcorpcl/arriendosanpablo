@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="guide_truck_tree" model="ir.ui.view">
+        <field name="name">guide.truck.tree</field>
+        <field name="model">guide.truck</field>
+        <field name="arch" type="xml">
+          <tree string="Listado de Camiones" editable="bottom">
+            <field name="truck_serial_number"/>
+            <field name="model"/>
+            <field name="code"/>
+          </tree>
+        </field>
+      </record>
+
+      <record id="guide_truck_action_window" model="ir.actions.act_window">
+        <field name="name">Listado de camiones</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">guide.truck</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Lap!
+            </p>
+        </field>
+      </record>
+
+      <menuitem
+          id="guide_truck_menu"
+          name="Listado de camiones"
+          action="guide_truck_action_window"
+          parent="stock.menu_stock_config_settings"
+          sequence="50"/>
+
+</odoo>

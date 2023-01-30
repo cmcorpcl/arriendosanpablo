@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- sale quotation report -->
+    <template id="flowit_atributes_on_dte52_report" inherit_id="l10n_cl_edi_stock.delivery_guide_document">
+
+        <xpath expr="/t/t/t/t[2]/div/div[2]" position="after">
+            <br></br>
+            <br></br>
+            <table class="table table-bordered">
+                <tbody>
+                    <t t-if="o.option == 'Empleado'">
+                        <td>
+                            <span>
+                                <strong>Chofer: </strong>
+                            </span>
+                            <t t-if="o.driver_id.name != False">
+                                <span t-field="o.driver_id.name"/>
+                            </t>
+                            </td>
+                        <td>
+                            <span>
+                                <strong>Rut: </strong>
+                            </span>
+                            <t t-if="o.driver_id_vat != False">
+                                <span t-field="o.driver_id_vat"/>
+                            </t>
+                        </td>
+                        <td>
+                            <span>
+                                <strong>Patente: </strong>
+                            </span>
+                            <t t-if="o.driver_truck_id.truck_serial_number != False">
+                                <span t-field="o.driver_truck_id.truck_serial_number"/>
+                            </t>
+                        </td>
+                    </t>
+                <t t-if="o.option == 'Nuevo'">
+                    <td>
+                        <span>
+                            <strong>Chofer: </strong>
+                        </span>
+                        <t t-if="o.driver_name != False">
+                            <span t-field="o.driver_name"/>
+                        </t>
+                        </td>
+                    <td>
+                        <span>
+                            <strong>Rut: </strong>
+                        </span>
+                        <t t-if="o.rut_driver != False">
+                            <span t-field="o.rut_driver"/>
+                        </t>
+                    </td>
+                    <td>
+                        <span>
+                            <strong>Patente: </strong>
+                        </span>
+                        <t t-if="o.truck_id.truck_serial_number != False">
+                            <span t-field="o.truck_id.truck_serial_number"/>
+                        </t>
+                    </td>
+                </t>
+                </tbody>
+            </table>
+        </xpath>
+    </template>
+</odoo>

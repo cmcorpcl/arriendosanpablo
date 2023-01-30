@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--User Groups, Access Rights and Security Mechanism in Detail-->
+    <!-- https://www.youtube.com/watch?v=mzg3EGD_6Gw&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=53  -->
+    <record id="module_category_dte_email_data" model="ir.module.category">
+        <field name="name">Dte Email</field>
+        <field name="description">Categoria para Configuración de DTE Email</field>
+        <field name="sequence">45</field>
+    </record>
+
+    <record id="group_dte_email_user" model="res.groups">
+        <field name="name">Usuario</field>
+        <field name="category_id" ref="module_category_dte_email_data"/>
+    </record>
+
+    <record id="group_dte_email_admin" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="implied_ids" eval="[(4, ref('group_dte_email_user'))]"/>
+        <field name="category_id" ref="module_category_dte_email_data"/>
+    </record>
+
+
+</odoo>

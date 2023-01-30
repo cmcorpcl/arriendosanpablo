@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- delivery_sequence.partner_lap -->
+  <record id="purchase_ledger_tree" model="ir.ui.view">
+    <field name="name">purchase.ledger.tree</field>
+    <field name="model">purchase.ledger.invoice</field>
+    <field name="arch" type="xml">
+      <tree string="Libro de compra" decoration-success="state == '1'" decoration-warning="state == '2'" decoration-danger="state == '3'"   create="false">
+        <field name="invoice_number"/>
+        <field name="bussiness_line" />
+        <field name="invoice_rut" optional='hide' />
+        <field name="invoice_type" optional='show' />
+        <field name="date" optional='hide' />
+        <field name="net_amount" optional='show' />
+        <field name="tax_amount" optional='show' />
+        <field name="exnt_amount" optional='show' />
+        <field name="total_amount" optional='show' />
+        <field name="invoice_total" optional='show' />
+        <field name="state" optional='hide' />
+        <field name="company_id" optional='show' groups="base.group_multi_company" />
+      </tree>
+    </field>
+  </record>
+
+  <record id="purchase_ledger_form" model="ir.ui.view">
+    <field name="name">purchase.ledger.form</field>
+    <field name="model">purchase.ledger.invoice</field>
+    <field name="arch" type="xml">
+      <form string="Libro de compras" create="false">
+        <field name="state" invisible='1'/>
+        <header>
+          <button string="Crear Factura" name="create_invoice" type="object" class="oe_highlight" attrs="{'invisible': [('state', '=', '1')]}" >
+          </button>
+        </header>
+        <sheet>
+          <p>
+            Folio
+          </p>
+          <div class="oe_title">
+            <h1>
+                <field name="invoice_number" readonly="1"/>
+            </h1>
+        </div>
+          <group>
+            <group>
+              <field name="bussiness_line" readonly="1" attrs="{'invisible': [('partner_id', '!=', False)]}"/>
+              <field name="partner_id" readonly="1" attrs="{'invisible': [('partner_id', '=', False)]}"/>
+              <field name="invoice_rut" readonly="1"/>
+              <field name="date" readonly="1"/>
+            </group>
+            <group>
+              <field name="invoice_type" readonly="1"/>
+              <field name="invoice_id" readonly="1"/>
+              <field name="total_amount" readonly="1"/>
+            </group>
+            <group class="oe_subtotal_footer oe_right" colspan="2" >
+              <field name="net_amount" widget='monetary' options="{'currency_field': 'currency_id'}" />
+              <field name="exnt_amount" widget='monetary' options="{'currency_field': 'currency_id'}"  />
+              <field name="tax_amount" widget='monetary' options="{'currency_field': 'currency_id'}"  />
+              <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                  <label for="total_amount"/>
+              </div>
+              <field name="total_amount" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+          </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+
+  <!-- Actions -->
+
+  <record id="purchase_ledger_action_window" model="ir.actions.act_window">
+    <field name="name">Libro de compra SII</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">purchase.ledger.invoice</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[]</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            No se ha sincronizado el libro de compras
+        </p>
+    </field>
+  </record>
+
+  <record model="ir.rule" id="purchase_ledger_not_shared_multi_company_rule_2">
+    <field name="name">Non Shared Records: ledger</field>
+    <field name="model_id" ref="purchase_ledger_sii.model_purchase_ledger_invoice"/>
+    <field name="global" eval="True"/>
+    <field name="domain_force">
+      ['|',('company_id','=',False),('company_id', 'in', company_ids)]
+    </field>
+</record>
+
+  <menuitem
+  id="purchase_ledger_item"
+  name="Libro de compra"
+  parent="account_accountant.menu_accounting"
+  sequence="30"/>
+
+  <menuitem
+  id="list_purchase_ledger"
+  name="Listado de compras"
+  parent="purchase_ledger_item"
+  action="purchase_ledger_action_window"
+  sequence="30"/>
+</odoo>

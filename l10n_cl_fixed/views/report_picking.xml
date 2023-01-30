@@ -1,0 +1,32 @@
+
+<odoo>
+    <!-- sale quotation report -->
+    <template id="fix_l10n_cl_cm_date" inherit_id="l10n_cl_edi_stock.stock_informations">
+        <xpath expr="/t/div/div/span" position="replace">
+            <t t-if="o.date_done">
+                <span t-esc="o.date_done.date()" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+              </t>
+              <t t-if="not o.date_done">
+                <span t-esc="o.scheduled_date.date()" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+              </t>
+        </xpath>
+          <xpath expr="/t/div[2]/div/t/table" position="attributes">
+            <attribute name="style">font-size:12px;</attribute>
+          </xpath>
+          <xpath expr="/t/div[2]/div/t/table/tbody/tr/td" position="attributes">
+            <attribute name="style">padding: 0.25rem!important;</attribute>
+          </xpath>
+          <xpath expr="/t/div[2]/div/t/table/tbody/tr/td[2]" position="attributes">
+            <attribute name="style">padding: 0.25rem!important;</attribute>
+          </xpath>
+          <xpath expr="/t/div[2]/div/t/table/tbody/tr/td[3]" position="attributes">
+            <attribute name="style">padding: 0.25rem!important;</attribute>
+          </xpath>
+          <xpath expr="/t/div[2]/div/t/table/tbody/tr/td[4]" position="attributes">
+            <attribute name="style">padding: 0.25rem!important;</attribute>
+          </xpath>
+          <xpath expr="/t/div[2]/div/t/table/tbody/tr/td[5]" position="attributes">
+            <attribute name="style">padding: 0.25rem!important;</attribute>
+          </xpath>
+    </template>
+</odoo>

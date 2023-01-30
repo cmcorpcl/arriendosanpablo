@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="fleet_vehicle_view_form_inherit" model="ir.ui.view">
+        <field name="name">fleet.vehicle.view.kanban.inherit</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban/field[@name='license_plate']" position="after">
+                <field name="compute_mantention" />
+                <field name="state_mantention_km" />
+                <field name="state_mantention_hr" />
+            </xpath>
+            <xpath expr="//templates/t/div/div/strong" position="after">
+                <field name="compute_mantention" invisible="1" />
+                <br></br>
+                <t t-if="record.state_mantention_km"><strong class="text-danger"><field name="state_mantention_km" /></strong> </t>
+                <t t-if="record.state_mantention_tr"><strong class="text-danger"><field name="state_mantention_tr" /></strong> </t>
+                <t t-if="record.state_mantention_hr"><strong class="text-danger"><field name="state_mantention_hr" /></strong> </t>
+            </xpath>
+        </field>
+      </record>
+
+      <record id="fleet_serie_number_product" model="ir.ui.view">
+        <field name="name">fleet.serie.number.product</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
+        <field name="arch" type="xml">
+          <xpath expr="//div[@class='oe_title']" position="inside">
+            <br/>
+            <label for="number_serie_id" class="oe_edit_only" string="Número de serie"/>
+            <field name="number_serie_id" class="oe_inline oe_edit_only"/>
+          </xpath>
+        </field>
+      </record>
+
+    <!-- ODOMETRO -->
+    <record id="fleet_rental_odometer_horometer_inherit" model="ir.ui.view">
+        <field name="name">fleet.rental.odometer.inherit</field>
+        <field name="model">fleet.vehicle.odometer</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_tree" />
+        <field name="arch" type="xml">
+          <field name="date" position="after">
+            <field name="time" widget="float_time" />
+          </field>
+          <field name="value" position="before">
+            <field name="horometer" />
+            <field name="truck_horometer" />
+          </field>
+          <field name="value" position="replace">
+            <field name="value" string="Odómetro" />
+          </field>
+        </field>
+      </record>
+
+
+</odoo>

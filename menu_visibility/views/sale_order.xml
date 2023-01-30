@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--     <record id="delivery_guide_tree_view_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.tree.delivery.guide.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <header>
+                <button string="Crear Guias de despacho" name="create_all_delivery_guide" type="object" class="oe_highlight"/>
+            </header>
+        </field>
+    </record> -->
+
+
+
+
+</odoo>

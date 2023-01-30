@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- delivery_sequence.lap -->
+  <record id="dte_partner_tree" model="ir.ui.view">
+    <field name="name">dte_email_data.dte_partner.tree</field>
+    <field name="model">dte_email_data.dte_partner</field>
+    <field name="arch" type="xml">
+      <tree create="false" editable="bottom">
+        <field name="rut"  />
+        <field name="bussiness_line"  />
+        <field name="dte_email"  />
+        <field name="url"  />
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_search_dte_partner_search" model="ir.ui.view">
+    <field name="name">dte_email_data.dte_partner.search</field>
+    <field name="model">dte_email_data.dte_partner</field>
+    <field name='arch' type='xml'>
+        <search>
+          <field name="rut" string="Rut"  filter_domain="[('rut', 'ilike', self )]" />
+          <field name="bussiness_line" string="Razón social"  filter_domain="[('bussiness_line', 'ilike', self )]" />
+        </search>
+    </field>
+</record>
+
+  <!-- Actions -->
+
+  <record id="dte_partner_action_window" model="ir.actions.act_window">
+    <field name="name">Lista de contribuyentes SII</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">dte_email_data.dte_partner</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            No existen contribuyentes sincronizados
+        </p>
+    </field>
+  </record>
+
+  <record id="dte_partner_action_window" model="ir.actions.act_window">
+    <field name="name">Lista de contribuyentes SII</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">dte_email_data.dte_partner</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            No existen contribuyentes sincronizados
+        </p>
+    </field>
+  </record>
+
+  <menuitem
+  id="dte_partner_menu"
+  name="Contribuyentes SII"
+  parent="contacts.menu_contacts"
+  groups="group_dte_email_admin"
+  sequence="30"/>
+
+
+
+</odoo>

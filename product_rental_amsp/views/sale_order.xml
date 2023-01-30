@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_amsp_on_sale_line_tree" model="ir.ui.view">
+        <field name="name">product.amsp.on.sale.line.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//tree//field[@name='name']" position="after">
+                <field name="tonnage_id" domain="[('product_ids','=', product_id)]"  optional="show"/>
+                <field name="template_product" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

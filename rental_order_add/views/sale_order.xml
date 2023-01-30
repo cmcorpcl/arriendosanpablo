@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="rental_san_pablo_add" model="ir.ui.view">
+        <field name="name">rental.san.pablo.add</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_confirm']" position="attributes">
+                <attribute name="groups">sales_team.group_sale_manager</attribute>
+              </xpath>
+              <xpath expr="//header/button[@name='action_confirm'][2]" position="attributes">
+                <attribute name="groups">sales_team.group_sale_manager</attribute>
+              </xpath>
+              <xpath expr="//header" position="inside">
+                <button string="Es requerimiento" type="object" name="make_requirement" class="btn-primary oe_read_only" attrs="{'invisible': ['|', ('state', 'not in', ['sent']), ('is_requirement','=',True) ]}"/>
+              </xpath>
+            <field name="payment_term_id" position="after">
+                <field name="is_autorized" invisible="1"/>
+                <field name="is_requirement" invisible="1"/>
+                <field name="state_autorized" invisible="1"/>
+                <field name="state_rental_asp" invisible="1"/>
+                <field name="state_autorized_store" widget="badge" force_save='1' decoration-success="state_autorized_store == 'autorizado'" decoration-danger="state_autorized_store == 'a_autorizar'"/>
+                <field name="state_rental_asp_store" widget="badge" force_save='1' decoration-warning="state_rental_asp_store == 'poder_cliente'" decoration-success="state_rental_asp_store == 'orden_de_trabajo'" decoration-danger="state_rental_asp_store == 'requerimiento_pendiente'" decoration-info="state_rental_asp_store == 'cotizacion'"  attrs="{'invisible': [ ('rental_status', '=', False)]}" />
+                <field name="diary_minimum_hours" attrs="{'invisible': [ ('rental_status', '=', False)]}" />
+                <field name="month_minimum_hours" attrs="{'invisible': [ ('rental_status', '=', False)]}" />
+                <field name="hour_price" attrs="{'invisible': [ ('rental_status', '=', False)]}" />
+            </field>
+          <xpath expr="//page[@name='order_lines']" position="after">
+            <page name="quotation_required" string="Datos Cotización" attrs="{'invisible':[('is_rental_order','!=',True)]}">
+                <group >
+                    <group>
+                        <field name="payment_options" widget="radio" options="{'horizontal': true}" />
+                        <field name="with_fuel" attrs="{'required': [('is_rental_order','=',True)]}"/>
+                        <field name="work_meal" attrs="{'required': [('is_rental_order','=',True)]}"/>
+                        <field name="work_lodging" attrs="{'required': [('is_rental_order','=',True)]}"/>
+                        <field name="work_rigger" attrs="{'required': [('is_rental_order','=',True)]}"/>
+                    </group>
+                </group>
+            </page>
+            <page string="Datos de Obra" name="work_values" attrs="{'invisible':[('is_rental_order','!=',True)]}">
+                <group>
+                    <group>
+                        <field name="work_address"  attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"  />
+                        <field name="work_city" attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                        <field name="work_partner" attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                        <field name="work_email" attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                    </group>
+                    <group>
+                        <field name="work_phone" attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                        <field name="route_from"  attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                        <field name="route_to" attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                        <field name="total_km"  attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                    </group>
+                    <label for="note_operator"/>
+                    <field name="note_operator"/>
+                </group>
+            </page>
+            <page string="Tipo de cliente" name="client_type" attrs="{'invisible':[('is_rental_order','!=',True)]}">
+                <group>
+                    <group>
+                        <field name="type_client" attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                        <field name="with_contract" attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                        <field name="document_type_guaranty" attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                        <field name="dicom" attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                        <field name="validate_document_guaranty" attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                        <field name="autorized_credit" attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True)]}"/>
+                        <field name="who_autorized_id" attrs="{'required': [('state','not in',['draft','cancel']),('is_requirement','=',True),('autorized_credit','=','yes')]}"/>
+                    </group>
+                </group>
+            </page>
+        </xpath>
+        </field>
+      </record>
+
+    <record id="rental_san_pablo_add_kanban" model="ir.ui.view">
+        <field name="name">rental.san.pablo.add.kanban</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sale_order_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_kanban_record_bottom')]" position="before">
+                <div class="oe_kanban_details d-flex flex-column">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <field name="state" invisible="1"/>
+                            <field name="state_rental_asp" invisible="1" />
+                            <field name="state_rental_asp_store" attrs="{'invisible': [ ('rental_status', '=', False)]}"  widget="label_selection" options="{'classes': {'cancelado': 'default','cotizacion': 'default','cotizacion_pendiente':'danger' ,'requerimiento': 'default','requerimiento_pendiente': 'danger' , 'order_de_trabajo': 'success', 'devuelto': 'success', 'poder_cliente': 'warning'}}" />
+                        </div>
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-4 text-right">
+                            <field name="is_autorized" invisible="1"/>
+                            <field name="state_autorized" invisible="1"/>
+                            <field name="rental_status" invisible="1"/>
+                            <field name="state_autorized_store" attrs="{'invisible': [ ('rental_status', '=', False)]}"  widget="label_selection" options="{'classes': {'a_autorizar': 'danger', 'autorizado': 'success'}}" />
+                        </div>
+                    </div>
+                </div>
+              </xpath>
+        </field>
+      </record>
+
+    <record id="rental_san_pablo_add_tree" model="ir.ui.view">
+        <field name="name">rental.san.pablo.add.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_renting.rental_order_view_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="is_autorized" invisible="1"/>
+                <field name="state_autorized" invisible="1" />
+                <field name="state_autorized_store" optional="show"/>
+                <field name="state_rental_asp" invisible="1" />
+                <field name="state_rental_asp_store" optional="show" />
+            </field>
+        </field>
+      </record>
+
+    <record id="rental_san_pablo_add_search" model="ir.ui.view">
+        <field name="name">rental.san.pablo.add.search</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_renting.rental_order_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="/search/searchpanel/field[@name='rental_status']" position="replace">
+                <field name="state_rental_asp_store" icon="fa-retweet" enable_counters="1"/>
+            </xpath>
+            <xpath expr="/search/searchpanel" position="inside">
+                <field name="state_autorized_store" icon="fa-retweet" enable_counters="1"/>
+            </xpath>
+        </field>
+      </record>
+
+
+</odoo>

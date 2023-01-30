@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="is_project_for_mantention_form" model="ir.ui.view">
+        <field name="name">is.project.for.mantention.form</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project" />
+        <field name="arch" type="xml">
+            <field name="privacy_visibility" position="after">
+                <field name="is_fsm_mantention" attrs="{'invisible':[('is_fsm','!=',True)]}"/>
+            </field>
+        </field>
+      </record>
+
+    <record id="project_task_form_number_serie" model="ir.ui.view">
+        <field name="name">project.task.form.number.serie</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="number_serie_id" />
+            </field>
+        </field>
+      </record>
+
+</odoo>

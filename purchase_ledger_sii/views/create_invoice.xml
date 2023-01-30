@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_create_purchase_invoice_form" model="ir.ui.view">
+        <field name="name">purchase_ledger_sii.create_invoice.wizard.form</field>
+        <field name="model">purchase_ledger.create_invoice.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Crear Factura">
+                <group>
+                    <group>
+                        <field name="partner_id" />
+                        <field name="bussiness_line" readonly="1" />
+                        <field name="invoice_rut" readonly="1" />
+                        <field name="invoice_number" readonly="1" />
+                    </group>
+                    <group>
+                        <field name="date" readonly="1" />
+                        <field name="total" readonly="1" />
+                        <field name="net_amount" readonly="1"  />
+                        <field name="purchase_ledger_invoice" readonly="1" />
+                        <field name="company_id" invisible="1" />
+                    </group>
+                </group>
+                <footer>
+                    <button string="Crear y ver Factura" name="create_invoice_from_ledger" type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

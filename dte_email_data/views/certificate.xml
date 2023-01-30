@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="dte_partner_l10n_cl_certificate" model="ir.ui.view">
+    <field name="name">dte_partner_l10n_cl_certificate</field>
+    <field name="model">l10n_cl.certificate</field>
+    <field name="inherit_id" ref="l10n_cl_edi.certificate_form_view" />
+    <field name="arch" type="xml">
+      <field name="user_id" position="after">
+        <field name="priority_dte" />
+        <field name="only_dte" />
+        <field name="compute_encrypt_pass" invisible="1"/>
+        <field name="encrypt_pass" invisible="1"/>
+        <field name="key_encrypt" invisible="1"/>
+      </field>
+    </field>
+  </record>
+</odoo>

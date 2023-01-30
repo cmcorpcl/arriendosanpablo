@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_password_sii_company_form" model="ir.ui.view">
+        <field name="model">res.company</field>
+        <field name="name">view.password.sii.company.form</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="SII" string="Autentificación SII">
+                    <group colspan="2">
+                        <field name="company_rut_sii" placeholder="Formato: 99999999-3" />
+                        <field name="company_sii_pass" password="True" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

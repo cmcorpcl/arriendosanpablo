@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crossed_reference_auto_delivery_guide" model="ir.ui.view">
+        <field name="name">cross.reference.auto.delivery.guide</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="l10n_cl_edi.view_invoice_form" />
+        <field name="arch" type="xml">
+            <field name="l10n_cl_reference_ids" position="after">
+                <field name="allowed_picking_ids" invisible="1"/>
+                <field name="picking_ref_ids" widget="many2many" mode="tree,kanban" attrs="{'invisible':[ ('state', '=', 'cancel')]}">
+                    <tree>
+                        <field name="l10n_latam_document_number" string="N° Guia"/>
+                        <field name="name" string="Orden"/>
+                        <field name="date_done" string="Fecha"/>
+                    </tree>
+                </field>
+            </field>
+            <field name="l10n_cl_reference_ids" position="replace">
+                <field name="l10n_cl_reference_ids" mode="tree" >
+                    <tree editable="bottom">
+                        <field name="delivery_guide_id" readonly="1" />
+                        <field name="origin_doc_number" required="True" attrs="{'readonly':[('delivery_guide_id','!=',False)]}" force_save="1"/>
+                        <field name="l10n_cl_reference_doc_type_selection" required="True" attrs="{'readonly':[('delivery_guide_id','!=',False)],'force_save':[('delivery_guide_id','!=',False)]}"  force_save="1"/>
+                        <field name="reference_doc_code" attrs="{'invisible': [('l10n_cl_reference_doc_type_selection', 'not in', ['39','33','34','71','38','61','56','29','30','32','40','43','45','46','55','60','901','914','911','904','905','906','907','35','41','70','110','111','112','50','52'])]}"/>
+                        <field name="reason"/>
+                        <field name="date" attrs="{'readonly':[('delivery_guide_id','!=',False)],'force-save':[('delivery_guide_id','!=',False)]}"  force_save="1"/>
+                    </tree>
+                </field>
+            </field>
+        </field>
+    </record>
+
+
+</odoo>

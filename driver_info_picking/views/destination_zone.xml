@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="destination_zone_tree" model="ir.ui.view">
+        <field name="name">destination.zone.tree</field>
+        <field name="model">destination.zone</field>
+        <field name="arch" type="xml">
+          <tree string="Listado de zone" editable="bottom">
+            <field name="name"/>
+          </tree>
+        </field>
+      </record>
+
+      <record id="destionation_zone_action_window" model="ir.actions.act_window">
+        <field name="name">Listado de zonas</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">destination.zone</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Lap!
+            </p>
+        </field>
+      </record>
+
+      <menuitem
+          id="destination_zone_menu"
+          name="Listado de zonas"
+          action="destionation_zone_action_window"
+          parent="stock.menu_stock_config_settings"
+          sequence="50"/>
+
+
+</odoo>

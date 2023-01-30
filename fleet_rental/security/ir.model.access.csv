@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fleet_situation_type,access_fleet_situation_type,model_fleet_situation_type,,1,1,1,1
+access_fleet_to_rental,access_fleet_to_rental,model_fleet_to_rental,,1,1,1,1
+access_fleet_fuel,access_fleet_fuel,model_fleet_vehicle_fuel,,1,1,1,1
+access_fleet_license,access_fleet_license,model_fleet_vehicle_license,,1,1,1,1

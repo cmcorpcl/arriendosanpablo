@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_destination_info_batch_form_inherit" model="ir.ui.view">
+        <field name="name">view.destination.info.batch.form.inherit</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form" />
+        <field name="arch" type="xml">
+          <field name="scheduled_date" position="after">
+            <field name="picking_type_code" invisible="1"/>
+            <field name="option" widget="radio" attrs="{'invisible':[('picking_type_code','!=','outgoing')]}" options="{'horizontal': true}" string="Opción"/>
+            <field name="driver_id" string="Conductor asociado" attrs="{'invisible':['|',('option','!=','Empleado'),('picking_type_code','!=','outgoing')],'required':[('picking_type_code','=','outgoing'),('option','=','Empleado')]}"/>
+            <field name="driver_id_vat" attrs="{'invisible':['|',('option','!=','Empleado'),('picking_type_code','!=','outgoing')],'required':[('picking_type_code','=','outgoing'),('option','=','Empleado')]}" readonly="1" />
+            <field name="driver_truck_id" attrs="{'invisible':['|',('option','!=','Empleado'),('picking_type_code','!=','outgoing')],'required':[('picking_type_code','=','outgoing'),('option','=','Empleado')]}" readonly="1"/>
+            <field name="driver_name" string="Conductor" attrs="{'invisible':['|',('option','!=','Nuevo'),('picking_type_code','!=','outgoing')],'required':[('picking_type_code','=','outgoing'),('option','=','Nuevo')]}"/>
+            <field name="rut_driver" string="Rut Conductor" attrs="{'invisible':['|',('option','!=','Nuevo'),('picking_type_code','!=','outgoing')],'required':[('picking_type_code','=','outgoing'),('option','=','Nuevo')]}"/>
+            <field name="truck_id" string="Camión" attrs="{'invisible':['|',('option','!=','Nuevo'),('picking_type_code','!=','outgoing')],'required':[('picking_type_code','=','outgoing'),('option','=','Nuevo')]}"/>
+          </field>
+        </field>
+      </record>
+
+      <record id="view_destination_info_picking_form_inherit" model="ir.ui.view">
+        <field name="name">view.destination.info.picking.form.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+          <field name="location_id" position="after">
+            <field name="batch_id"/>
+            <field name="zone_name" invisible="1" />
+            <field name="zone_stored" string="Zona Destino"/>
+            <field name="option" widget="radio" options="{'horizontal': true}" attrs="{'invisible':[('picking_type_code','!=','outgoing')]}" string="Opción"/>
+            <field name="driver_id" string="Conductor asociado" attrs="{'invisible':['|',('option','!=','Empleado'),('picking_type_code','!=','outgoing')],'required':[('picking_type_code','=','outgoing'),('option','=','Empleado')]}"/>
+            <field name="driver_truck_id" attrs="{'invisible':['|',('option','!=','Empleado'),('picking_type_code','!=','outgoing')],'required':[('picking_type_code','=','outgoing'),('option','=','Empleado')]}"/>
+            <field name="driver_name" string="Conductor" attrs="{'invisible':['|',('option','!=','Nuevo'),('picking_type_code','!=','outgoing')],'required':[('picking_type_code','=','outgoing'),('option','=','Nuevo')]}"/>
+            <field name="truck_id" attrs="{'invisible':['|',('option','!=','Nuevo'),('picking_type_code','!=','outgoing')],'required':[('picking_type_code','=','outgoing'),('option','=','Nuevo')]}"/>
+            </field>
+            <field name="origin" position="after">
+                <field name="driver_id_vat" attrs="{'invisible':['|',('option','!=','Empleado'),('picking_type_code','!=','outgoing')],'required':[('picking_type_code','=','outgoing'),('option','=','Empleado')]}" readonly="1"/>
+                <field name="rut_driver" string="Rut Conductor" attrs="{'invisible':['|',('option','!=','Nuevo'),('picking_type_code','!=','outgoing')],'required':[('picking_type_code','=','outgoing'),('option','=','Nuevo')]}"/>
+          </field>
+        </field>
+      </record>
+
+      <record id="view_destination_info_picking_tree_inherit" model="ir.ui.view">
+        <field name="name">view.destination.info.picking.tree.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+          <field name="scheduled_date" position="after">
+            <field name="zone_name" string="Zona Destino"/>
+          </field>
+        </field>
+      </record>
+
+      <record id="view_search_zone_stock_picking" model="ir.ui.view">
+        <field name="name">stock.picking.search.zone.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name='inherit_id' ref='stock.view_picking_internal_search'/>
+        <field name='arch' type='xml'>
+            <search>
+                <field name="zone_stored" string="Zona destino"  filter_domain="[('zone_stored', 'ilike', self )]" />
+                <separator/>
+                <filter name="zone_stored" string="Zona destino" context="{'group_by': 'zone_stored'}" />
+            </search>
+        </field>
+    </record>
+
+</odoo>

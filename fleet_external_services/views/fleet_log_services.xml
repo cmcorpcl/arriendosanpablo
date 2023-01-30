@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mod_log_services_inherit" model="ir.ui.view">
+        <field name="name">mod.log.services.inherit</field>
+        <field name="model">fleet.vehicle.log.services</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_log_services_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header/field[@name='state']" position="attributes">
+                <attribute name="options">{}</attribute>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button string="Crear Servicio Externo" name="make_external_service" type="object" class="oe_highlight oe_read_only" attrs="{'invisible':[('state','!=','todo')]}"/>
+                <button string="Marcar Como Hecho" name="action_done" type="object" class="oe_highlight oe_read_only" attrs="{'invisible':[('state','in',['done','cancel'])]}"/>
+                <button string="Cancelar" name="action_cancel" type="object" class="btn-primary oe_read_only" attrs="{'invisible':[('state','=','cancel')]}"/>
+                <button string="Reestablecer a borrador" name="action_todo" type="object" class="btn-primary oe_read_only" attrs="{'invisible':[('state','=','todo')]}"/>
+            </xpath>
+            <field name="purchaser_id" position="after">
+                <field name="odo_hor" widget="radio"/>
+            </field>
+            <xpath expr="//label[@for='odometer']" position="replace">
+                <label string="Odómetro" for="odometer" attrs="{'invisible':[('odo_hor','not in',['odo','hor_tr'])]}"/>
+            </xpath>
+            <xpath expr="//div[@class='o_row']" position="replace">
+                <div class="o_row">
+                    <field name="odometer" invisible="1"/>
+                    <field name="odometer_note" attrs="{'invisible':[('odo_hor','not in',['odo','hor_tr'])]}"/>
+                    <field name="odometer_unit" attrs="{'invisible':[('odo_hor','not in',['odo','hor_tr'])]}"/>
+                </div>
+                <label string="Horómetro" for="horometer_note" attrs="{'invisible':[('odo_hor','!=','hor')]}"/>
+                <div class="o_row">
+                    <field name="horometer_note" attrs="{'invisible':[('odo_hor','!=','hor')]}"/>
+                </div>
+            </xpath>
+            <field name="vendor_id" position="after">
+                <field name="type_mant" widget="radio"/>
+            </field>
+            <field name="vendor_id" position="replace">
+            </field>
+            <field name="amount" position="replace">
+            </field>
+        </field>
+      </record>
+
+    <record id="mod_log_services_tree_inherit" model="ir.ui.view">
+        <field name="name">mod.log.services.tree.inherit</field>
+        <field name="model">fleet.vehicle.log.services</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_log_services_view_tree" />
+        <field name="arch" type="xml">
+            <field name="description" position="after">
+                <field name="odo_hor"/>
+                <field name="odometer_note"/>
+                <field name="horometer_note"/>
+            </field>
+        </field>
+      </record>
+
+
+</odoo>

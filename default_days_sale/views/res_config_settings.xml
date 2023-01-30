@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_default_days_form" model="ir.ui.view">
+        <field name="name">res.config.settings</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='quotation_validity_days']" position="after">
+                <div class="col-xs-12 col-md-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="days_plus_default"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="days_plus_default"/>
+                        <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." role="img"/>
+                        <div class="text-muted">
+                            Agrega dias sumados a la fecha de los pedidos de venta de manera predeterminada
+                        </div>
+                        <div class="content-group mt-2" attrs="{'invisible': [('days_plus_default', '=', False)]}">
+                            <div class="row">
+                                <label for="days_to_sum" class="col-lg-4 o_light_label"/>
+                                <field name="days_to_sum"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="guide_number_on_tree_cl" model="ir.ui.view">
+        <field name="name">guide.number.on.tree.cl</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="l10n_latam_document_number" string="N° Guia"/>
+            </field>
+        </field>
+    </record>
+
+
+</odoo>

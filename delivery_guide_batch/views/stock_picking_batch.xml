@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="view_batch_info_button_form_inherit" model="ir.ui.view">
+        <field name="name">view.batch.button.form.inherit</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form" />
+        <field name="arch" type="xml">
+          <xpath expr="//header/button[@name='action_confirm']" position="after">
+                <button name="make_l10n_ch_guide_pickings" string="Crear Guías de despacho" attrs="{'invisible':[('state','!=','done')]}" type="object"/>
+                <button name="print_delivery_guide_pdf" string="Imprimir Guías de despacho" attrs="{'invisible':[('state','!=','done')]}" type="object"/>
+          </xpath>
+        </field>
+      </record>
+
+</odoo>

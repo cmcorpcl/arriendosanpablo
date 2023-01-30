@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ir_ui_view_asmp_boolean" model="ir.ui.view">
+        <field name="name">ir.ui.view.asmp.boolean</field>
+        <field name="model">ir.ui.view</field>
+        <field name="inherit_id" ref="base.view_view_form" />
+        <field name="arch" type="xml">
+            <field name="active" position="after">
+                <field name="product_template_amsp" widget="boolean_toggle" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_connector_purchase_invoice_form" model="ir.ui.view">
+        <field name="name">purchase_ledger_sii.connector.wizard.form</field>
+        <field name="model">purchase_ledger.connector.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Conector de libro de compras">
+                <group>
+                    <group>
+                        <field name="month" widget="selection"/>
+                        <field name="year" widget="selection"/>
+                    </group>
+                    <group>
+                        <field name="company_id" widget="selection" />
+                    </group>
+                </group>
+                <footer>
+                    <button string="Sincronizar" name="synchro_purchase_invoices" type="object" class="btn-primary"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_connector_purchase_invoice" model="ir.actions.act_window">
+        <field name="name">Sincronizar libro de compra</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase_ledger.connector.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_connector_purchase_invoice_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="connector_purchase_ledger"
+        name="Sincronizar Libro de compra"
+        parent="purchase_ledger_item"
+        action="action_connector_purchase_invoice"
+        sequence="30"/>
+
+</odoo>

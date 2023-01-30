@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- sale quotation report -->
+    <template id="fix_l10n_cl_cm_account_report" inherit_id="account.report_invoice_document">
+        <xpath expr="/t/t/div/table" position="attributes">
+            <attribute name="style">font-size:12px;</attribute>
+        </xpath>
+        <xpath expr="/t/t/div/div[2]" position="attributes">
+            <attribute name="style">font-size:12px;</attribute>
+        </xpath>
+        <xpath expr="/t/t/div/table/tbody/t[3]/tr/t/td" position="attributes">
+            <attribute name="style">padding: 0.25rem!important;</attribute>
+        </xpath>
+        <xpath expr="/t/t/div/table/tbody/t[3]/tr/t/td[2]" position="attributes">
+            <attribute name="style">padding: 0.25rem!important;</attribute>
+        </xpath>
+        <xpath expr="/t/t/div/table/tbody/t[3]/tr/t/td[3]" position="attributes">
+            <attribute name="style">padding: 0.25rem!important;</attribute>
+        </xpath>
+        <xpath expr="/t/t/div/table/tbody/t[3]/tr/t/td[4]" position="attributes">
+            <attribute name="style">padding: 0.25rem!important;</attribute>
+        </xpath>
+        <xpath expr="/t/t/div/table/tbody/t[3]/tr/t/td[5]" position="attributes">
+            <attribute name="style">padding: 0.25rem!important;</attribute>
+        </xpath>
+        <xpath expr="/t/t/div/table/tbody/t[3]/tr/t/td[6]" position="attributes">
+            <attribute name="style">padding: 0.25rem!important;</attribute>
+        </xpath>
+    </template>
+
+    <template id="fix_l10n_cl_cm_account_informations_edi_report" inherit_id="l10n_cl_edi.informations">
+        <xpath expr="//table[@name='invoice_references']" position="replace">
+            <table class="table table-sm o_main_table small" name="invoice_references" style="font-size:12px;">
+                <thead>
+                    <tr>
+                        <th name="th_reference_origin" class="text-center"><span>Origin Ref</span></th>
+                        <th name="th_reference_doc_type" class="text-left"><span>Reference Doc Type</span></th>
+                        <th name="th_reference_code" class="text-center"><span>Doc Code</span></th>
+                        <th name="th_reference_reason" class="text-left"><span>Reason</span></th>
+                        <th name="th_reference_date" class="text-left"><span>Date</span></th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                <t t-foreach="o.l10n_cl_reference_ids" t-as="refs">
+                    <tr>
+                        <td class="text-left p-1" name="td_reference_origin"><span t-field="refs.origin_doc_number"/></td>
+                        <td class="text-left p-1" name="td_reference_doc_type"><span t-field="refs.l10n_cl_reference_doc_type_selection"/></td>
+                        <td class="text-left p-1" name="td_reference_code"><span t-field="refs.reference_doc_code"/></td>
+                        <td class="text-left p-1" name="td_reference_reason"><span t-field="refs.reason"/></td>
+                        <td class="text-left p-1" name="td_reference_date"><span t-field="refs.date"/></td>
+                    </tr>
+                </t>
+                </tbody>
+            </table>
+        </xpath>
+    </template>
+
+
+
+
+</odoo>

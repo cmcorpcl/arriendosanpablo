@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="dte_partner_email_tree_inherit" model="ir.ui.view">
+    <field name="name">dte_partner_email_tree_inherit</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_tree" />
+    <field name="arch" type="xml">
+      <xpath expr="/tree" position="inside">
+        <header>
+          <button string="Sincronizar DTE" groups="dte_email_data.group_dte_email_user" name="change_dte_email" type="object" class="oe_highlight"/>
+        </header>
+      </xpath>
+      <field name="city" position="before">
+        <field name="l10n_cl_dte_email" optional="hide"/>
+      </field>
+    </field>
+  </record>
+</odoo>

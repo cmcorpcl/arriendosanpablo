@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="change_company_button_in_sale_order" model="ir.ui.view">
+        <field name="name">change.company.button.in.sale.order</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button string="Cambiar Compañia" name="change_company_from_wizard" type="object" class="oe_highlight" attrs="{'invisible':[('state','not in',['done','sale'])]}"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

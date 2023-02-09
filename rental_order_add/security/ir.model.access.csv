@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_fuel_odometer,access_fuel_odometer,model_fuel_odometer,base.group_user,1,1,1,1
+access_rental_work_time,access_rental_work_time,model_rental_work_time,base.group_user,1,1,1,1
+access_rental_chor,access_rental_chor,model_rental_chor,base.group_user,1,1,1,1

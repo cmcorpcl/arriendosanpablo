@@ -9,3 +9,5 @@ class SaleOrder(models.Model):
     tonnage=  fields.Char(string="Tonelaje",copy=False)
     driver_id = fields.Many2one('res.partner',string="Conductor",copy=False)
     fleet_id = fields.Many2one('fleet.vehicle',string="Flota",copy=False)
+    rigger_id = fields.Many2one('hr.employee', string="Rigger", copy=False)
+    operator_id = fields.Many2one('hr.employee', string="Operario", copy=False)

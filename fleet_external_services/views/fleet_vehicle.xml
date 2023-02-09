@@ -41,7 +41,7 @@
         <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_tree" />
         <field name="arch" type="xml">
           <field name="date" position="after">
-            <field name="time" widget="float_time" />
+            <field name="time" widget="float_time" invisible="1" />
           </field>
           <field name="value" position="before">
             <field name="horometer" />

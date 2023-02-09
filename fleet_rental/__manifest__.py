@@ -15,14 +15,15 @@
     'website': 'https://www.cmcorp.cl',
     'depends':  [
         'sale_renting',
-        'fleet'
+        'fleet',
     ],
     'data':  [
         'security/ir.model.access.csv',
         'views/sale_order.xml',
         'views/fleet.xml',
         'views/fleet_situation_type.xml',
-        'views/fleet_vehicule_license.xml'
+        'views/fleet_vehicule_license.xml',
+        'views/hr_employee.xml'
     ],
     'installable': True,
     'auto_install': False,

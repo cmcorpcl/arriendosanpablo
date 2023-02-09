@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="fleet_to_rental_form_inherit" model="ir.ui.view">
+        <field name="name">fleet.to.rental.form.inherit</field>
+        <field name="model">fleet.to.rental</field>
+        <field name="inherit_id" ref="fleet_rental.fleet_to_rental_form" />
+        <field name="arch" type="xml">
+          <field name="rental_id" position="replace">
+            <field name="rental_id" domain="[('state_rental_asp_store','=','requerimiento')]" options="{'no_create': True, 'no_open': True}" />
+          </field>
+          <field name="rental_id" position="after">
+            <field name="needs_rigger" invisible="1" />
+            <field name="needs_operator" invisible="1" />
+            <field name="rigger_id" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':[('needs_rigger','=',False)],'required':[('needs_rigger','=',True)]}" />
+            <field name="operator_id" options="{'no_create': True, 'no_open': True}" attrs="{'invisible':[('needs_operator','=',False)],'required':[('needs_operator','=',True)]}" />
+          </field>
+        </field>
+      </record>
+
+
+</odoo>

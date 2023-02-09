@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="project_task_analytic_line_with_report_number" model="ir.ui.view">
+        <field name="name">project.task.analytic.line.with.report.number</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@id='timesheets_tab']/field[@name='timesheet_ids']/tree/field[@name='date']" position="before">
+                <field name="report_number" />
+            </xpath>
+            <field name="unit_amount" position="before">
+                <field name="note" string="Horas de trabajo" />
+            </field>
+            <field name="unit_amount" position="attributes">
+                <attribute name="string">Horas a cobrar</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="analytic_line_with_report_number" model="ir.ui.view">
+        <field name="name">analytic.line.with.report.number</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree" />
+        <field name="arch" type="xml">
+            <field name="date" position="before">
+                <field name="report_number" />
+            </field>
+            <field name="unit_amount" position="before">
+                <field name="note" />
+            </field>
+            <field name="unit_amount" position="attributes">
+                <attribute name="string">Horas a cobrar</attribute>
+            </field>
+        </field>
+    </record>
+
+
+</odoo>

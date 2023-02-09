@@ -15,7 +15,8 @@
     'website': 'https://www.cmcorp.cl',
     'depends':  [
         'sale_management',
-        'sale_renting'
+        'sale_renting',
+        'fleet_rental'
     ],
     'data':  [
         'security/ir.model.access.csv',
@@ -23,7 +24,10 @@
         'views/hr_employee.xml',
         'views/sale_order.xml',
         'views/sale_order_report.xml',
-        'views/account_move_report.xml'
+        'views/account_move_report.xml',
+        'views/rental_work_time.xml',
+        'views/fleet_to_rental.xml',
+        'views/rental_chor.xml'
     ],
     'installable': True,
     'auto_install': False,

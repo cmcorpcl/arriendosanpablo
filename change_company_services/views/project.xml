@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="related_project_between_companies" model="ir.ui.view">
+        <field name="name">related.project.between.companies</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project" />
+        <field name="arch" type="xml">
+            <field name="privacy_visibility" position="after">
+                <field name="companie_related_project_ids" widget="many2many_tags"/>
+            </field>
+        </field>
+      </record>
+
+
+</odoo>

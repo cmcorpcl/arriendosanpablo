@@ -12,7 +12,6 @@ class FleetVehicleOdometer(models.Model):
     rental_id = fields.Many2one('sale.order', string='Arriendo Asociado',domain="[('is_rental_order','=',True)]")
     note = fields.Char(string="Nota")
 
-
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
         res = super(FleetVehicleOdometer,self).read_group( domain, fields, groupby, offset, limit, orderby, lazy)

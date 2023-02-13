@@ -78,6 +78,7 @@
         </field>
       </record>
 
+
     <record id="rental_san_pablo_add_kanban" model="ir.ui.view">
         <field name="name">rental.san.pablo.add.kanban</field>
         <field name="model">sale.order</field>

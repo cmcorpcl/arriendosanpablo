@@ -1,6 +1,11 @@
 from odoo import models, fields, api
 from datetime import datetime
 
+GASTANK=[
+    ('tank1','Primer estanque'),
+    ('tank2','Segundo estanque'),
+]
+
 class FleetVehicleFuel(models.Model):
     _name = 'fleet.vehicle.fuel'
     _order = 'date desc'
@@ -9,6 +14,7 @@ class FleetVehicleFuel(models.Model):
     driver_id = fields.Many2one('res.partner',string="Responsable de carga")
     date = fields.Datetime(string="Fecha", default=datetime.today())
     time = fields.Float(string="Tiempo")
+    gas_tank = fields.Selection(GASTANK,string="Estanque",default='tankl')
     horometer = fields.Float(string="Horometro Grúa")
     horometer_tr = fields.Float(string="Horometro Camión")
     start_fuel = fields.Float(string="Odómetro al cargar")

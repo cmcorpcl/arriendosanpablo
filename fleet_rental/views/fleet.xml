@@ -57,6 +57,7 @@
             <field name="time" widget="float_time" invisible="1"/>
             <field name="vehicle_id" widget="many2one_avatar" options="{'no_create': True, 'no_create_edit' : True}"/>
             <field name="driver_id" widget="many2one_avatar" options="{'no_create': True, 'no_create_edit' : True}"/>
+            <field name="gas_tank" />
             <field name="horometer" />
             <field name="horometer_tr" />
             <field name="start_fuel" />

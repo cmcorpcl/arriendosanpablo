@@ -25,6 +25,7 @@
                             <field name="vehicle_id" />
                             <field name="driver_id" />
                             <field name="value" />
+                            <field name="note" />
                             <field name="unit" />
                             </tree>
                         </field>
@@ -32,9 +33,16 @@
                         <field name="fleet_vehicle_fuel_ids" readonly="1"  >
                           <tree>
                             <field name="date" />
-                            <field name="time"  widget="float_time"/>
+                            <field name="time" widget="float_time" invisible="1"/>
+                            <field name="vehicle_id" widget="many2one_avatar"/>
+                            <field name="driver_id" widget="many2one_avatar"/>
+                            <field name="gas_tank" />
+                            <field name="horometer" />
+                            <field name="horometer_tr" />
                             <field name="start_fuel" />
                             <field name="end_fuel" />
+                            <field name="note"/>
+                            <field name="rental_id"  widget="many2one_avatar" />
                           </tree>
                         </field>
                 </group>

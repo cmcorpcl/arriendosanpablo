@@ -15,8 +15,8 @@ RENTALSTATEASP = [
     ('cancelado','Cancelado'),
     ('cotizacion','Cotizacion'),
     ('cotizacion_pendiente','Cotizacion Pendiente'),
-    ('requerimiento','Requerimiento'),
     ('requerimiento_pendiente','Requerimiento Pendiente'),
+    ('requerimiento','Requerimiento'),
     ('orden_de_trabajo','Orden de Trabajo'),
     ('poder_cliente','En el poder del cliente'),
     ('devuelto','Devuelto'),
@@ -41,6 +41,11 @@ GUARANTEEDOC = [
     ('sin_garantia','Sin Garantía')
 ]
 
+CHORSELECT = [
+    ('dentro','Dentro'),
+    ('fuera','Fuera'),
+]
+
 class SaleOrder(models.Model):
     _name = 'sale.order'
     _inherit = ['sale.order']
@@ -56,7 +61,8 @@ class SaleOrder(models.Model):
     with_fuel = fields.Selection(CLIENTORUS,string='Combustible' )
     work_meal = fields.Selection(CLIENTORUS,string="Alimentación" )
     work_lodging = fields.Selection(CLIENTORUS,string="Alojamiento" )
-    work_rigger = fields.Selection(CLIENTORUS,string="Rigger")
+    work_rigger = fields.Selection(YESNO,string="Rigger")
+    work_operator = fields.Selection(YESNO,string="Operario")
     payment_options = fields.Selection(PAYOPT,string="Opcion de pago", default="efectivo")
 
     type_client = fields.Selection(CLIENTTYPE,string='Tipo cliente',default="antiguo")
@@ -72,10 +78,10 @@ class SaleOrder(models.Model):
 
     is_autorized = fields.Boolean(string="Autorizar")
     state_autorized = fields.Selection(TOAUTORIZED,string="Estado Autorización comp",compute="_compute_state_autorized")
-    state_autorized_store = fields.Selection(TOAUTORIZED,string="Estado Autorización", default="a_autorizar")
+    state_autorized_store = fields.Selection(TOAUTORIZED,string="Estado Autorización", default="a_autorizar", copy=False)
 
     state_rental_asp = fields.Selection(RENTALSTATEASP,string="Estado ASP comp",compute="_compute_state_rental_asp")
-    state_rental_asp_store = fields.Selection(RENTALSTATEASP,string="Estado ASP", default="requerimiento")
+    state_rental_asp_store = fields.Selection(RENTALSTATEASP,string="Estado ASP", default="cotizacion", copy=False)
 
     is_requirement = fields.Boolean(string="Es requerimiemto", readonly=True)
 
@@ -84,6 +90,10 @@ class SaleOrder(models.Model):
     hour_price = fields.Float(string="Precio Hora")
 
     note_operator = fields.Text(string="Detalle Servicio")
+
+    chor_id = fields.Many2one('rental.chor',string="Faena")
+    details_chor = fields.Text(string="Detalle Faena")
+    rental_work_time_id =  fields.Many2one('rental.work.time',string="Horario laboral")
 
     def action_confirm(self):
         result = super(SaleOrder, self).action_confirm()
@@ -130,14 +140,17 @@ class SaleOrder(models.Model):
                 record.state_rental_asp = "requerimiento_pendiente"
                 record.state_rental_asp_store = "requerimiento_pendiente"
             elif record.state in ["sale","done"]:
-                record.state_rental_asp = "orden_de_trabajo"
-                record.state_rental_asp_store = "orden_de_trabajo"
-                if record.rental_status == "return":
-                    record.state_rental_asp = "poder_cliente"
-                    record.state_rental_asp_store = "poder_cliente"
-                elif record.rental_status == "returned":
-                    record.state_rental_asp = "devuelto"
-                    record.state_rental_asp_store = "devuelto"
+                record.state_rental_asp = "requerimiento"
+                record.state_rental_asp_store = "requerimiento"
+                if record.fleet_id:
+                    record.state_rental_asp = "orden_de_trabajo"
+                    record.state_rental_asp_store = "orden_de_trabajo"
+                    if record.rental_status == "return":
+                        record.state_rental_asp = "poder_cliente"
+                        record.state_rental_asp_store = "poder_cliente"
+                    elif record.rental_status == "returned":
+                        record.state_rental_asp = "devuelto"
+                        record.state_rental_asp_store = "devuelto"
 
     @api.depends('is_autorized')
     def _compute_state_autorized(self):

@@ -8,6 +8,9 @@ class FleetVehicle(models.Model):
     fleet_fuel_ids = fields.One2many('fleet.vehicle.fuel','vehicle_id', string="Combustibles")
     fuel_count = fields.Integer(compute="_compute_count_fuel", string='Combustible')
     vehicule_license_id = fields.Many2one('fleet.vehicle.license',string="Matrícula")
+    rigger_id = fields.Many2one('hr.employee', string="Rigger", domain="[('rigger_ok','=',True)]" )
+    operator_id = fields.Many2one('hr.employee', string="Operario", domain="[('operator_ok','=',True)]")
+
 
     def copy_to_rental(self):
         for record in self:

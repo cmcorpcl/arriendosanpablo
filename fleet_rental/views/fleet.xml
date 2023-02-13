@@ -9,14 +9,18 @@
           <xpath expr="//header" position="inside">
               <button string="Traspaso a arriendo" name="copy_to_rental" type="object" class="oe_highlight"/>
           </xpath>
-          <field name="vin_sn" position="before">
-              <field name="tonnage" />
-          </field>
           <xpath expr="//div[@name='button_box']" position="inside">
             <button name="return_action_to_open_inherit" type="object" class="oe_stat_button" icon="fa-fire" context="{'xml_id':'fleet_vehicle_fuel_action'}" help="Muestra el registro de combustible del vehiculo">
                 <field name="fuel_count" widget="statinfo" string="Combustible"/>
               </button>
           </xpath>
+          <field name="vin_sn" position="before">
+              <field name="tonnage" />
+          </field>
+          <field name="driver_id" position="after">
+              <field name="rigger_id" />
+              <field name="operator_id" />
+          </field>
         </field>
       </record>
 
@@ -32,7 +36,9 @@
                   <group>
                       <field name="vehicle_id" options="{'no_create': True, 'no_create_edit' : True}"/>
                       <field name="date" />
-                      <field name="time" widget="float_time"/>
+                      <field name="time" widget="float_time" invisible="1"/>
+                      <field name="horometer" />
+                      <field name="horometer_tr" />
                       <field name="start_fuel" />
                       <field name="end_fuel" />
                       <field name="rental_id" options="{'no_create': True, 'no_create_edit' : True}" />
@@ -48,9 +54,11 @@
       <field name="arch" type="xml">
           <tree string="Registro Combustible" editable="top">
             <field name="date" />
-            <field name="time" widget="float_time"/>
+            <field name="time" widget="float_time" invisible="1"/>
             <field name="vehicle_id" widget="many2one_avatar" options="{'no_create': True, 'no_create_edit' : True}"/>
             <field name="driver_id" widget="many2one_avatar" options="{'no_create': True, 'no_create_edit' : True}"/>
+            <field name="horometer" />
+            <field name="horometer_tr" />
             <field name="start_fuel" />
             <field name="end_fuel" />
             <field name="note"/>
@@ -147,6 +155,11 @@
             <field name="rental_id" options="{'no_create': True, 'no_create_edit' : True}"  widget="many2one_avatar" />
         </field>
       </field>
+    </record>
+
+
+    <record id="fleet.fleet_vehicle_odometer_action" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form,graph,pivot</field>
     </record>
 
 </odoo>

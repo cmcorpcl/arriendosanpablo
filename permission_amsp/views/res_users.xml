@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="permission_amsp_users" model="ir.ui.view">
+        <field name="name">permission.amsp.users</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Permisos AMSP" name="permission_amsp">
+                    <group>
+                        <group>
+                            <field name="fleet_to_rental_right" />
+                            <field name="pick_rental_right" />
+                            <field name="edit_rental" />
+                            <field name="fleet_edit" />
+                            <field name="fuel_edit" />
+                            <field name="odometer_edit" />
+                        </group>
+                    </group>
+                    </page>
+            </xpath>
+        </field>
+      </record>
+
+
+</odoo>

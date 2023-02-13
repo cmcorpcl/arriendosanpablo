@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id='rental_work_time_tree' model='ir.ui.view'>
+        <field name="name">rental.work.time.tree</field>
+        <field name="model">rental.work.time</field>
+        <field name="arch" type="xml">
+            <tree string="Horario Laboral" editable="bottom">
+              <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id='rental_work_time_search' model='ir.ui.view'>
+        <field name="name">rental.work.time.search</field>
+        <field name="model">rental.work.time</field>
+        <field name="arch" type="xml">
+            <search string="Horario Laboral" >
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id='rental_work_time_action' model='ir.actions.act_window'>
+        <field name="name">Horario Laboral</field>
+        <field name="res_model">rental.work.time</field>
+        <field name="view_mode">tree</field>
+        <field name="context"></field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Crear nuevo registro de horario laboral
+          </p>
+        </field>
+    </record>
+
+    <menuitem
+    id="rental_work_time_menu_item"
+    name="Horario Laboral"
+    parent="sale_renting.menu_rental_config"
+    action="rental_work_time_action"
+    sequence="30"/>
+</odoo>

@@ -22,8 +22,8 @@ class FleetVehicle(models.Model):
                 services_odometer_cr = self.env['fleet.vehicle.log.services'].search([('vehicle_id','=',record.id),('state','not in',['todo','cancelled']),('odo_hor','=','odo')])
                 services_horometer_tr = self.env['fleet.vehicle.log.services'].search([('vehicle_id','=',record.id),('state','not in',['todo','cancelled']),('odo_hor','=','hor_tr')])
                 services_horometer = self.env['fleet.vehicle.log.services'].search([('vehicle_id','=',record.id),('state','not in',['todo','cancelled']),('odo_hor','=','hor')])
-                odometer = self.env['fleet.vehicle.odometer'].search([('vehicle_id','=',record.id)], order='date desc, time desc', limit=1)
-                horometer = self.env['fleet.vehicle.odometer'].search([('vehicle_id','=',record.id)], order='date desc, time desc', limit=1)
+                odometer = self.env['fleet.vehicle.odometer'].search([('vehicle_id','=',record.id)], order='date desc', limit=1)
+                horometer = self.env['fleet.vehicle.odometer'].search([('vehicle_id','=',record.id)], order='date desc', limit=1)
                 pass_services_cr = False
                 pass_services_tr = False
                 pass_services_hr = False
@@ -54,7 +54,7 @@ class FleetVehicle(models.Model):
                     for horometer in truck_horometer_ids:
                          if odometer.value >= horometer.horometer and horometer.horometer > max_service_horometer_tr:
                             record.compute_mantention = "Compute"
-                            record.state_mantention_tr = "Horómetro Camión "+ str(km.km)+ ' hrs'
+                            record.state_mantention_tr = "Horómetro Camión "+ str(horometer.horometer)+ ' hrs'
                 if pass_services_hr:
                     for horometer in crane_horometer_ids:
                         if odometer.horometer >= horometer.horometer and horometer.horometer > max_service_horometer:
